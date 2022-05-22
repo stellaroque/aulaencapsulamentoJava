@@ -16,7 +16,11 @@ public class ControleRemoto implements Controlador {
     }
 
     public void setVolume(int volume) {
-        this.volume = volume;
+       if (volume < 0 || volume > 100 ) {
+           System.out.println("ERRO!");
+       } else {
+           this.volume = volume;
+       }
     }
 
     public boolean getLigado() {
@@ -68,14 +72,14 @@ public class ControleRemoto implements Controlador {
     @Override
     public void maisVolume() {
         if (this.getLigado()) {
-            this.setVolume(this.getVolume()+1);
+            this.setVolume(this.getVolume() + 1);
         }else {
             System.out.println("Impossivel aumentar volume!");
         }
     }
 
     @Override
-    public void menosVoluma() {
+    public void menosVolume() {
         if (this.getLigado()) {
             this.setVolume(this.getVolume() - 1);
         } else {
@@ -99,7 +103,7 @@ public class ControleRemoto implements Controlador {
 
     @Override
     public void play() {
-        if (this.getLigado() && this.getTocando()) {
+        if (this.getLigado() && this.getTocando() == false) {
             this.setTocando(true);
         }
     }
